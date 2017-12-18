@@ -24,7 +24,7 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 
 ## Features
 
-- [x] generates a Makefile
+- [ ] generates a Makefile
 - [ ] user-defined tag support
 - [ ] user-defined clean functionality
 - [ ] mulitple file and dependency support
