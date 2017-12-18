@@ -9,7 +9,9 @@ and will only work with one file. This template can be generated and then edited
 
 ## Usage
 
-First add the bash script to the ~/bin/ folder (on OSX)
+First add the bash script to the ~/bin/ folder (on OSX) and run
+
+```chmod +x make-gen.sh```
 
 then add the following alias to your bash profile.
 ```alias gen='~/bin/make-gen.sh'```
