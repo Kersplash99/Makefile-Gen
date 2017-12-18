@@ -9,7 +9,12 @@ and will only work with one file. This template can be generated and then edited
 
 ## Usage
 
-```gen Makefile <filename>```
+First add the bash script to the ~/bin/ folder (on OSX)
+
+then add the following alias to your bash profile.
+```alias gen='~/bin/make-gen.sh'```
+
+To use the generator -> ```gen Makefile <filename>``` in the bash terminal you use
 
 * ensure that the filename does not have a file extension. 
 
@@ -23,3 +28,4 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 - [ ] user-defined tag support
 - [ ] user-defined clean functionality
 - [ ] mulitple file and dependency support
+- [ ] firgure out a way to make deployment easier
