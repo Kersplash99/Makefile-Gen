@@ -21,29 +21,29 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 
 ## Options
 
-* -t <file-name>
+* -t "file-name"
 
 		Option to add a target file.
 
-* -c <compiler>
+* -c "compiler"
 	
 		Option to use preffered compiler.
 		Defaults to 'gcc'
 
 * -w
 
-                Compile with '-Wall' flag
+		Compile with '-Wall' flag
 
 * -g 
 
 		Compile with debugging '-g' flag enabled
 
-* -s <std>
+* -s "std"
 
 		Specify the standard of C/C++ to use.
 		Defaults to c99.
 
-* -f "<custom flag> ..."
+* -f "-custom-flag> ..."
 
 		Add other flags/ compiler option.
 		Requires a string put flags in double quotes.
