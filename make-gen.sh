@@ -5,17 +5,18 @@
 compiler="gcc"
 std="c99"
 target=""
+clean=""
 
 # set up the flags
 declare -a flags
 
 # extract data from options
-while getopts "wgs:c:t:f:" OPTION; do
+while getopts "wgs:c:t:f:r:" OPTION; do
   case $OPTION in
   c) # user defined compiler
     compiler="$OPTARG"
     if [ -z "$compiler" ]; then
-      echo "Compile cannot be an empty string"
+      echo "Compile cannot be an empty string."
       exit 1;
     fi
     ;;
@@ -23,14 +24,14 @@ while getopts "wgs:c:t:f:" OPTION; do
     # shave of the file extension if there is one
     target=${OPTARG%.*}
     if [ -z "$target" ]; then
-      echo "Target file name cannot be an empty string"
+      echo "Target file name cannot be an empty string."
       exit 1;
     fi
     ;;
   s) # user defined standard
     std="$OPTARG"
     if [ -z "$std" ]; then
-      echo "Standard cannot be an empty string"
+      echo "Standard cannot be an empty string."
       exit 1;
     fi
     ;;
@@ -40,14 +41,21 @@ while getopts "wgs:c:t:f:" OPTION; do
   g) # enable debugging
     flags=("${flags[@]}" "-g")
     ;;
-  f) # user defined standard
+  f) # user defined compiler flags
     custom_flags="$OPTARG"
     if [ -z "$custom_flags" ]; then
-      echo "Standard cannot be an empty string"
+      echo "Custom flags cannot be empty."
       exit 1;
     fi
 
     flags=("${flags[@]}" "$custom_flags")
+    ;;
+  r) # file to remove
+    clean="$OPTARG"
+    if [ -z "$clean" ]; then
+      echo "Temporary file to clean cannot be an empty string."
+      exit 1;
+    fi
     ;;
   *) # undefined option
     echo "Incorrect option entered."
@@ -75,6 +83,13 @@ echo "" >> MakeFile
 if [ -n "$target" ]; then
   echo "# target files" >> MakeFile
   echo "${target}: ${target}.o" >> MakeFile
+  echo "" >> MakeFile
 fi
+
+# add in files to clean
+echo "# remove unwanted temporary files" >> MakeFile
+echo "clean:" >> Makefile
+echo "  rm -f ${clean}" >> MakeFile
+echo "" >> MakeFile
 
 exit 0
