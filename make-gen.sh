@@ -15,10 +15,7 @@ echo "CFLAGS = -Wall -std=c99" >> MakeFile
 echo "" >> MakeFile
 
 # are there enough options
-if [ "$#" -lt "2"  ]; then
-  echo "Incorrect options."
-  echo "Syntax: make-gen.sh <target name> ..."
-else
+if [ "$#" -ge "1"  ]; then
   # target file name (executable file)
   target = $1;
   if [ -n "$target" ]; then
