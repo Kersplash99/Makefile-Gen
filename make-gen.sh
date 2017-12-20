@@ -5,10 +5,10 @@
 compiler="gcc"
 std="c99"
 target=""
-clean=""
 
-# set up the flags
+# set up the flags and temp files to clean
 declare -a flags
+declare -a clean
 
 # extract data from options
 while getopts "wgs:c:t:f:r:" OPTION; do
@@ -51,11 +51,13 @@ while getopts "wgs:c:t:f:r:" OPTION; do
     flags=("${flags[@]}" "$custom_flags")
     ;;
   r) # file to remove
-    clean="$OPTARG"
-    if [ -z "$clean" ]; then
+    tmp_file="$OPTARG"
+    if [ -z "$tmp_file" ]; then
       echo "Temporary file to clean cannot be an empty string."
       exit 1;
     fi
+
+    clean=("${clean[@]}" "$tmp_file")
     ;;
   *) # undefined option
     echo "Incorrect option entered."
@@ -86,10 +88,15 @@ if [ -n "$target" ]; then
   echo "" >> MakeFile
 fi
 
-# add in files to clean
-echo "# remove unwanted temporary files" >> MakeFile
-echo "clean:" >> Makefile
-echo "  rm -f ${clean}" >> MakeFile
-echo "" >> MakeFile
+if [ ${#clean[@]} -gt 0 ]; then
+  # add in files to clean
+  echo "# remove unwanted temporary files" >> MakeFile
+  echo "clean:" >> Makefile
+
+  for file in "${clean[@]}"; do
+    echo "  rm -f ${file}" >> MakeFile
+  done
+  echo "" >> MakeFile
+fi
 
 exit 0
