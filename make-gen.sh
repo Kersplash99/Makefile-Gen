@@ -9,27 +9,28 @@ compiler="gcc"
 flags="-Wall -std=c99"
 target=""
 
- while getopts "c:t:" OPTION; do
-    case $OPTION in
-    c)
-        compiler="$OPTARG"
-        if [ -z "$compiler" ]; then
-          echo "Compile cannot be an empty string"
-          exit 1;
-        fi
-        ;;
-    t)
-        target="$OPTARG";
-        if [ -z "$target" ]; then
-          echo "Target file name cannot be an empty string"
-          exit 1;
-        fi
-        ;;
-    *)
-        echo "Incorrect option entered."
-        exit 1
-        ;;
-    esac
+# extract data from options
+while getopts "c:t:" OPTION; do
+  case $OPTION in
+  c) # user defined compiler
+    compiler="$OPTARG"
+    if [ -z "$compiler" ]; then
+      echo "Compile cannot be an empty string"
+      exit 1;
+    fi
+    ;;
+  t) # user defined target file
+    target="$OPTARG";
+    if [ -z "$target" ]; then
+      echo "Target file name cannot be an empty string"
+      exit 1;
+    fi
+    ;;
+  *) # undefined option
+    echo "Incorrect option entered."
+    exit 1
+    ;;
+  esac
 done
 
 # add in compiler information
