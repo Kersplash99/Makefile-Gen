@@ -11,7 +11,7 @@ and will only work with one file. This template can be generated and then edited
 
 ```gen Makefile <filename>```
 
-* ensure that the filename does not have a file extension. 
+		Note * ensure that the filename does not have a file extension. 
 
 For eg, to generate a Makefile for the file example.c, run the comman:
 
