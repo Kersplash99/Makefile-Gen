@@ -13,14 +13,15 @@ target=""
 while getopts "c:t:" OPTION; do
   case $OPTION in
   c) # user defined compiler
-    compiler="$OPTARG"
+    copiler="$OPTARG"
     if [ -z "$compiler" ]; then
       echo "Compile cannot be an empty string"
       exit 1;
     fi
     ;;
   t) # user defined target file
-    target="$OPTARG";
+    # shave of the file extension if there is one
+    target=${OPTARG%.*}
     if [ -z "$target" ]; then
       echo "Target file name cannot be an empty string"
       exit 1;
@@ -34,7 +35,7 @@ while getopts "c:t:" OPTION; do
 done
 
 # add in compiler information
-echo "# compiler to use" > MakeFile
+echo "# compiler tom use" > MakeFile
 echo "CC = ${compiler}" >> MakeFile
 echo "" >> MakeFile
 

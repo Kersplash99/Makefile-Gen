@@ -22,17 +22,20 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 ## Options
 
 * -t <file-name>
-	Option to add a target file.
-	Note* do not include the file extensions or else the Makefile wont work without editing.
+
+		Option to add a target file.
 
 * -c <compiler>
-	Option to use preffered compiler.
-	Defaults to 'gcc'
+	
+		Option to use preffered compiler.
+		Defaults to 'gcc'
 
 ## Features
 
 - [x] generates a Makefile
 - [x] user-defined compiler support
-- [ ] remove the need to put in the file name without extensions
+- [x] remove the need to put in the file name without extensions
+- [ ] user defined flags
+- [ ] user defined standard
 - [ ] user-defined clean functionality
 - [ ] mulitple file and dependency support
