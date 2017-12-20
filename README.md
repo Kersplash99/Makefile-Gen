@@ -18,7 +18,7 @@ then add the following alias to your bash profile.
 
 To use the generator -> ```gen Makefile <filename>``` in the bash terminal you use
 
-		Note * ensure that the filename does not have a file extension. 
+	Note * ensure that the filename does not have a file extension. 
 
 For eg, to generate a Makefile for the file example.c, run the comman:
 
@@ -26,7 +26,7 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 
 ## Features
 
-- [ ] generates a Makefile
+- [x] generates a Makefile
 - [ ] user-defined tag support
 - [ ] user-defined clean functionality
 - [ ] mulitple file and dependency support
