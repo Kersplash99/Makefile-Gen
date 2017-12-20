@@ -50,6 +50,11 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 			
 		eg. ./make-gen.sh -t test.c -w -g -s c99 -f "-DNDEBUG"
 
+* -r "\<tmp-file\> ..."
+
+		Will create clean functionality in the Makefile for the specified files.
+		Requires a string put the temp files in double quotes if there are more than 1.		
+
 ## Features
 
 - [x] generates a Makefile
@@ -57,5 +62,6 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 - [x] remove the need to put in the file name without extensions
 - [x] user defined compiler flags
 - [x] user defined compiler standard
-- [ ] user-defined clean functionality
+- [x] user-defined clean functionality
 - [ ] mulitple file and dependency support
+- [ ] user proof input option, prevent flags to be duplicated etc

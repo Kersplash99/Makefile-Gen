@@ -51,13 +51,13 @@ while getopts "wgs:c:t:f:r:" OPTION; do
     flags=("${flags[@]}" "$custom_flags")
     ;;
   r) # file to remove
-    tmp_file="$OPTARG"
-    if [ -z "$tmp_file" ]; then
+    tmp_files="$OPTARG"
+    if [ -z "$tmp_files" ]; then
       echo "Temporary file to clean cannot be an empty string."
       exit 1;
     fi
 
-    clean=("${clean[@]}" "$tmp_file")
+    clean=($tmp_files)
     ;;
   *) # undefined option
     echo "Incorrect option entered."
