@@ -96,12 +96,32 @@ if [ -n "$target" ]; then
   # are there multiple dependencies
   if [ "$has_dep" -eq "1" ]; then
     read -p "Enter dependencies of target: " -a dep
-     for file in "${dep[@]}"; do
+    for file in "${dep[@]}"; do
       echo -n " ${file%.*}.o" >> MakeFile
     done
   fi
 
   echo "" >> Makefile
+  echo "" >> MakeFile
+fi
+
+# are there dependencies
+if [ ${#dep[@]} -gt "0" ]; then
+  echo "# dependencies" >> MakeFile
+  # add target file so that its dependencies are accounted
+  dep=("$target" "${dep[@]}")
+
+  for tar in  "${dep[@]}"; do
+    echo -n "${tar%.*}.o:" >> MakeFile
+    declare -a headers
+
+    read -p "Enter header files included in ${tar}: " -a headers
+    for file in "${headers[@]}"; do
+      echo -n " ${file%.*}.h" >> MakeFile
+    done
+    echo "" >> Makefile
+  done
+
   echo "" >> MakeFile
 fi
 
