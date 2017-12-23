@@ -5,13 +5,15 @@
 compiler="gcc"
 std="c99"
 target=""
+has_dep="0" # true if there are multiple files
 
-# set up the flags and temp files to clean
+# set up the flags, dependencies and temp files to clean
 declare -a flags
+declare -a dep
 declare -a clean
 
 # extract data from options
-while getopts "wgs:c:t:f:r:" OPTION; do
+while getopts "dwgs:c:t:f:r:d" OPTION; do
   case $OPTION in
   c) # user defined compiler
     compiler="$OPTARG"
@@ -59,6 +61,9 @@ while getopts "wgs:c:t:f:r:" OPTION; do
 
     clean=($tmp_files)
     ;;
+  d) # the make file has mulitple dependencies
+    has_dep="1"
+    ;;
   *) # undefined option
     echo "Incorrect option entered."
     exit 1
@@ -82,9 +87,21 @@ echo "# compiler flags (c99 standard)" >> MakeFile
 echo "CFLAGS = ${flags[@]}" >> MakeFile
 echo "" >> MakeFile
 
+# is there a target file
 if [ -n "$target" ]; then
   echo "# target files" >> MakeFile
-  echo "${target}: ${target}.o" >> MakeFile
+
+  echo -n "${target}: ${target}.o" >> MakeFile
+
+  # are there multiple dependencies
+  if [ "$has_dep" -eq "1" ]; then
+    read -p "Enter dependencies of target: " -a dep
+     for file in "${dep[@]}"; do
+      echo -n " ${file%.*}.o" >> MakeFile
+    done
+  fi
+
+  echo "" >> Makefile
   echo "" >> MakeFile
 fi
 
