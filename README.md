@@ -1,11 +1,6 @@
 # Makefile-Gen
 
-This script provides a template to generate a simple Makefile for c99 code. This is currently bare-bones,
-will be added in the future. 
-
-Currently, the script will only produce a template for a Makefile with the flags "-Wall -std=c99"
-and will only work with one file. This template can be generated and then edited if need be.
-
+This bash script generates a Makefile. Makefiles are build automation tools that are smart and reduce the effort and time it can take to build projects.
 
 ## Usage
 
@@ -21,10 +16,6 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 
 ## Options
 
-* -t \<file-name\>
-
-		Option to add a target file.
-
 * -c \<compiler\>
 	
 		Option to use preffered compiler.
@@ -34,9 +25,6 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 
 		Compile with '-Wall' flag
 
-* -g 
-
-		Compile with debugging '-g' flag enabled
 
 * -s \<std\>
 
@@ -49,6 +37,18 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 		Requires a string put flags in double quotes.
 			
 		eg. ./make-gen.sh -t test.c -w -g -s c99 -f "-DNDEBUG"
+
+* -g 
+
+		Compile with debugging '-g' flag enabled
+
+* -e \<file-name\>
+
+		Option to add an executable file.
+
+* -d
+	
+		Project has multiple dependencies
 
 * -r "\<tmp-file\> ..."
 
@@ -63,5 +63,5 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 - [x] user defined compiler flags
 - [x] user defined compiler standard
 - [x] user-defined clean functionality
-- [ ] mulitple file and dependency support
+- [x] mulitple file and dependency support
 - [ ] user proof input option, prevent flags to be duplicated etc
