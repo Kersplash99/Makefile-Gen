@@ -4,7 +4,7 @@
 # create and set default variables
 compiler="gcc"
 std="c99"
-target=""
+exec=""
 has_dep="0" # true if there are multiple files
 
 # set up the flags, dependencies and temp files to clean
@@ -13,7 +13,7 @@ declare -a dep
 declare -a clean
 
 # extract data from options
-while getopts "dwgs:c:t:f:r:d" OPTION; do
+while getopts "dwgs:c:e:f:r:d" OPTION; do
   case $OPTION in
   c) # user defined compiler
     compiler="$OPTARG"
@@ -22,11 +22,11 @@ while getopts "dwgs:c:t:f:r:d" OPTION; do
       exit 1;
     fi
     ;;
-  t) # user defined target file
+  e) # user defined executable file
     # shave of the file extension if there is one
-    target=${OPTARG%.*}
-    if [ -z "$target" ]; then
-      echo "Target file name cannot be an empty string."
+    exec=${OPTARG%.*}
+    if [ -z "$exec" ]; then
+      echo "executable file name cannot be an empty string."
       exit 1;
     fi
     ;;
@@ -87,15 +87,15 @@ echo "# compiler flags (c99 standard)" >> MakeFile
 echo "CFLAGS = ${flags[@]}" >> MakeFile
 echo "" >> MakeFile
 
-# is there a target file
-if [ -n "$target" ]; then
+# is there a executable file
+if [ -n "$exec" ]; then
   echo "# target files" >> MakeFile
 
-  echo -n "${target}: ${target}.o" >> MakeFile
+  echo -n "${exec}: ${exec}.o" >> MakeFile
 
   # are there multiple dependencies
   if [ "$has_dep" -eq "1" ]; then
-    read -p "Enter dependencies of target: " -a dep
+    read -p "Dependencies of executable: " -a dep
     for file in "${dep[@]}"; do
       echo -n " ${file%.*}.o" >> MakeFile
     done
@@ -108,14 +108,14 @@ fi
 # are there dependencies
 if [ ${#dep[@]} -gt "0" ]; then
   echo "# dependencies" >> MakeFile
-  # add target file so that its dependencies are accounted
-  dep=("$target" "${dep[@]}")
+  # add executable file so that its dependencies are accounted
+  dep=("$exec" "${dep[@]}")
 
-  for tar in  "${dep[@]}"; do
-    echo -n "${tar%.*}.o:" >> MakeFile
+  for target in  "${dep[@]}"; do
+    echo -n "${target%.*}.o:" >> MakeFile
     declare -a headers
 
-    read -p "Enter header files included in ${tar}: " -a headers
+    read -p "Header files included in ${target}: " -a headers
     for file in "${headers[@]}"; do
       echo -n " ${file%.*}.h" >> MakeFile
     done
