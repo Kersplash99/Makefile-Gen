@@ -18,7 +18,7 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 
 * -c \<compiler\>
 	
-		Option to use preffered compiler.
+		Option to use preferred compiler.
 		Defaults to 'gcc'
 
 * -w
@@ -33,8 +33,7 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 
 * -f "\<custom-flag\> ..."
 
-		Add other flags/ compiler option.
-		Requires a string put flags in double quotes.
+		Add other flags/compiler options.
 			
 		eg. ./make-gen.sh -t test.c -w -g -s c99 -f "-DNDEBUG"
 
@@ -53,7 +52,6 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 * -r "\<tmp-file\> ..."
 
 		Will create clean functionality in the Makefile for the specified files.
-		Requires a string put the temp files in double quotes if there are more than 1.		
 
 ## Features
 
