@@ -78,7 +78,7 @@ flags=("${flags[@]}" "-std=$std")
 touch Makefile
 
 # add in compiler information
-echo "# compiler tom use" > MakeFile
+echo "# compiler to use" > MakeFile
 echo "CC = ${compiler}" >> MakeFile
 echo "" >> MakeFile
 
