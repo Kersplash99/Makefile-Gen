@@ -53,13 +53,3 @@ For eg, to generate a Makefile for the file example.c, run the comman:
 
 		Will create clean functionality in the Makefile for the specified files.
 
-## Features
-
-- [x] generates a Makefile
-- [x] user-defined compiler support
-- [x] remove the need to put in the file name without extensions
-- [x] user defined compiler flags
-- [x] user defined compiler standard
-- [x] user-defined clean functionality
-- [x] mulitple file and dependency support
-- [ ] user proof input option, prevent flags to be duplicated etc
